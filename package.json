@@ -1,0 +1,50 @@
+{
+  "name": "_YourApp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./src/server/bin/www"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.3",
+    "body-parser": "~1.15.0",
+    "bourbon": "4.2.6",
+    "bourbon-neat": "1.7.4",
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.1",
+    "cookie-session": "2.0.0-alpha.1",
+    "debug": "~2.2.0",
+    "dotenv": "^2.0.0",
+    "express": "~4.13.4",
+    "express-session": "1.13.0",
+    "gulp-browserify": "^0.5.1",
+    "lodash": "^4.5.1",
+    "mocha": "^2.4.5",
+    "mongoose": "^4.4.12",
+    "morgan": "~1.7.0",
+    "passport": "^0.3.2",
+    "serve-favicon": "~2.3.0",
+    "swig": "^1.4.2",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "browserify": "^13.0.0",
+    "browser-sync": "2.11.1",
+    "gulp": "^3.9.1",
+    "jshint": "^2.9.1",
+    "gulp-babel": "^6.1.2",
+    "graceful-fs": "^4.1.3",
+    "gulp-jshint": "^2.0.0",
+    "gulp-rimraf": "^0.2.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^2.3.1",
+    "gulp-clean-css": "^2.0.2",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-sass": "^2.2.0",
+    "jshint-stylish": "^2.1.0",
+    "run-sequence": "^1.1.5"
+  }
+}

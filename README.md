@@ -11,3 +11,10 @@ Users can choose to filter tweets by geolocation, semantic analysis, and/or keyw
 
 ## Project Tracking
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/1572541)
+
+## Mockups
+#### Initial view on login
+![initial view on login](./initialview.JPG)
+#### View with filter active
+![view with filter active](./filterview.JPG)
+

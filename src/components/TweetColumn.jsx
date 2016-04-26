@@ -40,14 +40,15 @@ class TweetList extends Component {
 class IndividualTweet extends Component {
   constructor(props) {
     super(props);
-    this.tweetInfo = props.tweet;
+    console.log(this.props.tweet);
   }
 
   render() {
     return (
         <li className="tweet">
-          <p>{this.tweetInfo.user}</p>
-          <p>{this.tweetInfo.text}</p>
+          <p className="user">{this.props.tweet.user}</p>
+          <img src="{this.props.tweet.mediaUrl}" />
+          <p className="tweetBody">{this.props.tweet.text}</p>
         </li>
     );
   }

@@ -14,20 +14,31 @@ class TweetQueue {
 
 class TwitterSocket {
 
-  constructor() {
-    this.tweetQueue = new TweetQueue(10);
+  constructor(pCallback) {
+    this.tweetQueue = new TweetQueue(3);
     this.stompClient = null;
+    this.callback = pCallback;
+  }
+
+  tempAdd(tweet) {
+    this.tweetQueue.add(tweet);
+  }
+
+  getTweetArray() {
+    return this.tweetQueue.tweetArray;
   }
 
   connect() {
-      var socket = new SockJS('http://10.2.12.248:8080/tweet');
+      var socket = new SockJS('/tweet');
       this.stompClient = Stomp.over(socket);
-      this.stompClient.connect({}, function (frame) {
+      this.stompClient.connect({
+          apiKey: '71CC9BAA-3068-41DF-A17F-CF60DCDB3827'
+      }, function (frame) {
           setConnected(true);
           console.log('Connected: ' + frame);
-          this.stompClient.subscribe('http://10.2.12.248:8080/tweets', function (res) {
-              tweetQueue.add(res.body);
+          this.stompClient.subscribe('/tweets', function (res) {
               console.log(res.body);
+              //showTweet(res.body);
           });
       });
   }

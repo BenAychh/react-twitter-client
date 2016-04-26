@@ -5,20 +5,18 @@ import TwitterSocket from '../tweetprocessor.js';
 class TweetColumn extends Component {
   constructor() {
     super();
+    this.tweetList = <TweetList />
   }
 
   render() {
     return (
       <div className="col-md-2 tweet-column">
         <h3 className="center">TweetColumn</h3>
-        <TweetList />
+        <TweetList tweets={this.props.tweets}/>
       </div>
     );
   }
 }
-
-var twitterSocket = new TwitterSocket();
-twitterSocket.connect();
 
 class TweetList extends Component {
   constructor() {
@@ -26,14 +24,13 @@ class TweetList extends Component {
   }
 
   render() {
-    var indTweets = [];
-    twitterSocket.tweetQueue.tweetArray.forEach(tweet => {
-      indTweets.push(<IndividualTweet tweet={tweet} key={tweet.id}/>);
-    });
     return (
       <div className="tweet-list center">
         <ul className="center">
-          {indTweets}
+          {this.props.tweets.map((message, i) => {
+            return (
+              <IndividualTweet key={message.id} tweet={message} />)
+          })}
         </ul>
       </div>
     );

@@ -12,9 +12,27 @@ class TweetColumn extends Component {
         <h3 className="center">TweetColumn</h3>
         <TweetList />
       </div>
-    )
+    );
   }
 }
+
+var tweetArray = [
+  {
+    id: 1,
+    user: 'Ben',
+    text: 'I hope this works',
+  },
+  {
+    id: 2,
+    user: 'Kyle',
+    text: 'This fucking sucks',
+  },
+  {
+    id: 3,
+    user: 'Dave',
+    text: 'Java gives me a headache',
+  },
+];
 
 class TweetList extends Component {
   constructor() {
@@ -22,31 +40,33 @@ class TweetList extends Component {
   }
 
   render() {
+    var indTweets = [];
+    tweetArray.forEach(tweet => {
+      indTweets.push(<IndividualTweet tweet={tweet} key={tweet.id}/>);
+    });
     return (
       <div className="tweet-list center">
         <ul className="center">
-          <IndividualTweet />
+          {indTweets}
         </ul>
       </div>
-    )
+    );
   }
 }
 
 class IndividualTweet extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.tweetInfo = props.tweet;
   }
 
   render() {
     return (
-      <div className="individual-tweets">
-        <li className="tweet">Scenester leggings artisan kale chips jean shorts farm-to-table disrupt ramps mlkshk. Freegan tofu knausgaard, everyday carry ennui pour-over chambray wayfarers cronut synth brooklyn poutine.</li>
-        <li className="tweet">Man bun umami retro, sartorial whatever iPhone four loko fanny pack. Kombucha gastropub drinking vinegar YOLO.</li>
-        <li className="tweet">Vinyl blog tofu, green juice pitchfork man bun meggings art party put a bird on it marfa next level trust fund.</li>
-        <li className="tweet">Tattooed try-hard chia, flannel offal hella banjo YOLO slow-carb before they sold out crucifix migas 8-bit.</li>
-        <li className="tweet">Bespoke mlkshk hashtag, vinyl tote bag keffiyeh dreamcatcher chia DIY sustainable.</li>
-      </div>
-    )
+        <li className="tweet">
+          <p>{this.tweetInfo.user}</p>
+          <p>{this.tweetInfo.text}</p>
+        </li>
+    );
   }
 }
 

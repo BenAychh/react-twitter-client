@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
+import TweetQueue from '../01_tweetprocessor.js';
 
 class TweetColumn extends Component {
   constructor() {
@@ -34,6 +35,13 @@ var tweetArray = [
   },
 ];
 
+var tq = new TweetQueue(10);
+tq.add({
+    id: 3,
+    user: 'Dave',
+    text: 'Java gives me a headache',
+  });
+
 class TweetList extends Component {
   constructor() {
     super();
@@ -41,7 +49,7 @@ class TweetList extends Component {
 
   render() {
     var indTweets = [];
-    tweetArray.forEach(tweet => {
+    tq.tweetArray.forEach(tweet => {
       indTweets.push(<IndividualTweet tweet={tweet} key={tweet.id}/>);
     });
     return (

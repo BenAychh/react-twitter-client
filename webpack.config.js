@@ -1,6 +1,7 @@
 module.exports = {
   entry: [
-    './src/index.js'
+    './src/01_tweetprocessor.js',
+    './src/index.js',
   ],
   output: {
     path: __dirname,

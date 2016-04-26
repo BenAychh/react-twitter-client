@@ -1,6 +1,6 @@
 module.exports = {
   entry: [
-    './src/01_tweetprocessor.js',
+    './src/tweetprocessor.js',
     './src/index.js',
   ],
   output: {

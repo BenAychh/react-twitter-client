@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import TweetQueue from '../01_tweetprocessor.js';
+import TwitterSocket from '../tweetprocessor.js';
 
 class TweetColumn extends Component {
   constructor() {
@@ -17,30 +17,8 @@ class TweetColumn extends Component {
   }
 }
 
-var tweetArray = [
-  {
-    id: 1,
-    user: 'Ben',
-    text: 'I hope this works',
-  },
-  {
-    id: 2,
-    user: 'Kyle',
-    text: 'This fucking sucks',
-  },
-  {
-    id: 3,
-    user: 'Dave',
-    text: 'Java gives me a headache',
-  },
-];
-
-var tq = new TweetQueue(10);
-tq.add({
-    id: 3,
-    user: 'Dave',
-    text: 'Java gives me a headache',
-  });
+var twitterSocket = new TwitterSocket();
+twitterSocket.connect();
 
 class TweetList extends Component {
   constructor() {
@@ -49,7 +27,7 @@ class TweetList extends Component {
 
   render() {
     var indTweets = [];
-    tq.tweetArray.forEach(tweet => {
+    twitterSocket.tweetQueue.tweetArray.forEach(tweet => {
       indTweets.push(<IndividualTweet tweet={tweet} key={tweet.id}/>);
     });
     return (

@@ -1,0 +1,66 @@
+body{
+  width: 100%;
+  height: 100%;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+.half {
+  height: 50vh;
+}
+
+button {
+  width: 50%;
+}
+
+.dashboard {
+  height: 100vh;
+  background-color: burlywood;
+  border-right: 2px solid black;
+}
+
+.flex-box-container{
+  /* this is what is necessary */
+  display: flex;
+  height: 100vh;
+}
+
+.flex-box-box{
+  width: 50%;
+  /* this is what is necessary */
+  margin: auto;
+  background-color: black;
+  color: white;
+}
+
+.graph-container{
+  height: 100vh;
+  background-color: fuchsia;
+}
+
+.initial-view {
+  height: 100vh;
+  background-image: url(https://images.unsplash.com/photo-1461664777318-ea8f62dacefd?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=bcf7db480d15374d6a04397040866a5d);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+}
+
+.tweet-column{
+  height: 100vh;
+  background-color: aqua;
+  overflow: scroll;
+}
+
+
+.tweet{
+  margin-bottom: 3px;
+  background-color: white;
+}
+
+.center {
+  text-align: center;
+}

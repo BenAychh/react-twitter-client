@@ -1,15 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { Component } from 'react';
 
-import App from './components/app';
-import reducers from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+import Dashboard from './components/Dashboard';
+import InitialView from './components/InitialView';
+import TweetColumn from './components/TweetColumn';
+import GraphContainer from './components/GraphContainer';
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+
+
+class Home extends Component {
+  constructor () {
+    super();
+
+  }
+
+  render() {
+    return (
+      <div>
+        <Dashboard />
+        <InitialView />
+      </div>
+    )
+  }
+}
+class Filtered extends Component {
+  constructor () {
+    super();
+
+  }
+
+  render() {
+    return (
+      <div>
+        <Dashboard />
+        <TweetColumn />
+        <GraphContainer />
+      </div>
+    )
+  }
+}
+ReactDOM.render(<Filtered />, document.querySelector('.container'));

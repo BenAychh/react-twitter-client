@@ -1,13 +1,14 @@
 
 class TweetQueue {
-  constructor (maxSize){
+  constructor (maxSize) {
     this.maxSize = maxSize;
     this.tweetArray = [];
   }
-  add(tweet){
-    this.tweetArray.push(tweet);
-    if(this.tweetArray.length > this.maxSize){
-      this.tweetArray.shift();
+
+  add(tweet) {
+    this.tweetArray.unshift(tweet);
+    if (this.tweetArray.length > this.maxSize) {
+      this.tweetArray.pop();
     }
   }
 }
@@ -15,13 +16,9 @@ class TweetQueue {
 class TwitterSocket {
 
   constructor(pCallback) {
-    this.tweetQueue = new TweetQueue(3);
+    this.tweetQueue = new TweetQueue(10);
     this.stompClient = null;
     this.callback = pCallback;
-  }
-
-  tempAdd(tweet) {
-    this.tweetQueue.add(tweet);
   }
 
   getTweetArray() {
@@ -29,26 +26,27 @@ class TwitterSocket {
   }
 
   connect() {
-      var socket = new SockJS('/tweet');
-      this.stompClient = Stomp.over(socket);
-      this.stompClient.connect({
-          apiKey: '71CC9BAA-3068-41DF-A17F-CF60DCDB3827'
-      }, function (frame) {
-          setConnected(true);
-          console.log('Connected: ' + frame);
-          this.stompClient.subscribe('/tweets', function (res) {
-              console.log(res.body);
-              //showTweet(res.body);
-          });
+    var socket = new SockJS('http://10.2.12.248:8080/tweet');
+    this.stompClient = Stomp.over(socket);
+    this.stompClient.debug = null;
+    this.stompClient.connect({
+      apiKey: '71CC9BAA-3068-41DF-A17F-CF60DCDB3827',
+    }, (frame) => {
+      console.log('Connected: ' + frame);
+      this.stompClient.subscribe('/tweets', (res) => {
+        this.tweetQueue.add(JSON.parse(res.body));
+        this.callback();
       });
+    });
   }
 
   disconnect() {
-      if (this.stompClient != null) {
-          this.stompClient.disconnect();
-      }
-      setConnected(false);
-      console.log("Disconnected");
+    if (this.stompClient != null) {
+      this.stompClient.disconnect();
+    }
+
+    setConnected(false);
+    console.log('Disconnected');
   }
 }
 

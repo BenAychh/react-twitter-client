@@ -35,7 +35,7 @@ var Filtered = React.createClass({
 
   componentDidMount() {
     this.twitterSocket = new TwitterSocket(() => {
-      this.setState({tweets: this.twitterSocket.getTweetArray()})
+      this.setState({ tweets: this.twitterSocket.getTweetArray() })
     });
     this.twitterSocket.connect();
   },

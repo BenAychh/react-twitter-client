@@ -46,7 +46,7 @@ button {
   background-size: 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center; 
+  background-position: center;
 }
 
 .tweet-column{
@@ -63,4 +63,24 @@ button {
 
 .center {
   text-align: center;
+}
+.veryNegSen {
+  background: rgb(182, 0, 0);
+  color: white;
+}
+.negSen {
+  background: rgb(251, 137, 137);
+  color: black;
+}
+.neutralSen {
+  background: rgb(255, 255, 255);
+  color: black;
+}
+.posSen {
+  background: rgb(110, 255, 102);
+  color: black;
+}
+.veryPosSen {
+  background: rgb(2, 93, 0);
+  color: white;
 }

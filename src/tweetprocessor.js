@@ -26,14 +26,14 @@ class TwitterSocket {
   }
 
   connect() {
-    var socket = new SockJS('http://10.2.12.248:8080/tweet');
+    var socket = new SockJS('http://localhost:8080/tweet');
     this.stompClient = Stomp.over(socket);
-    // this.stompClient.debug = null;
     this.stompClient.connect({
-      apiKey: '71CC9BAA-3068-41DF-A17F-CF60DCDB3827',
+      apiKey: '12345',
+      keywords: ['Trump'],
     }, (frame) => {
       console.log('Connected: ' + frame);
-      this.stompClient.subscribe('/tweets', (res) => {
+      this.stompClient.subscribe('/tweets/12345', (res) => {
         this.tweetQueue.add(JSON.parse(res.body));
         this.callback();
       });

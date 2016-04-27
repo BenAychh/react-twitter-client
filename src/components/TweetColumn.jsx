@@ -47,7 +47,7 @@ class IndividualTweet extends Component {
     return (
         <li className="tweet">
           <p className="user">{this.props.tweet.user}</p>
-          <img src="{this.props.tweet.mediaUrl}" />
+          <img className="img-responsive" src={this.props.tweet.mediaUrl} />
           <p className="tweetBody">{this.props.tweet.text}</p>
         </li>
     );

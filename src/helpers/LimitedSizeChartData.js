@@ -8,12 +8,14 @@ class LimitedSizeChartData {
     while(this.sentimentArray.length > this.maxSize) {
       this.sentimentArray.shift();
     }
+
+    return this;
   }
   getChartObject() {
     return
     {
       labels: labelMaker(),
-      responsive: true;
+      responsive: true,
       showXLabels: showLabelNumber(),
       datasets: [
         {

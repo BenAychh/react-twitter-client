@@ -9,6 +9,8 @@ class limitedSizeArray {
     while (this.elementArray.length > this.maxSize) {
       this.elementArray.pop();
     }
+
+    return this;
   }
 
   getArray() {

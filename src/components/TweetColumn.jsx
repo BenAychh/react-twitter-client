@@ -5,7 +5,6 @@ import TwitterSocket from '../tweetprocessor.js';
 class TweetColumn extends Component {
   constructor() {
     super();
-    this.tweetList = <TweetList />
   }
 
   render() {
@@ -27,10 +26,9 @@ class TweetList extends Component {
     return (
       <div className="tweet-list center">
         <ul className="center">
-          {this.props.tweets.map((message, i) => {
-            return (
-              <IndividualTweet key={message.id} tweet={message} />)
-          })}
+          {this.props.tweets.map((message, i) =>
+              <IndividualTweet key={message.id} tweet={message} />
+          )}
         </ul>
       </div>
     );

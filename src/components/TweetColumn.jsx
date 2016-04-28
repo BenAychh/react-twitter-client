@@ -9,8 +9,8 @@ class TweetColumn extends Component {
 
   render() {
     return (
-      <div className="col-md-2 tweet-column">
-        <h3 className="center">TweetColumn</h3>
+      <div className="col-md-3 tweet-column border-right">
+        <h3 className="center white text-shadow"><em>Tweet Column</em></h3>
         <TweetList tweets={this.props.tweets}/>
       </div>
     );
@@ -25,7 +25,7 @@ class TweetList extends Component {
   render() {
     return (
       <div className="tweet-list center">
-        <ul className="center">
+        <ul className="no-decoration">
           {this.props.tweets.map((message, i) =>
               <IndividualTweet key={message.id} tweet={message} />
           )}

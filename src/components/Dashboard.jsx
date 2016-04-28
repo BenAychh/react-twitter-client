@@ -9,7 +9,7 @@ class AddFilterButton extends Component {
   render() {
     return (
       <div className="center">
-      <button>Add Filter</button>
+      <button className="btn btn-success">Add Filter</button>
       </div>
     );
   }
@@ -60,7 +60,7 @@ class Filters extends Component {
   render() {
     return (
       <div className="filters">
-      <legend className="center">Filters</legend>
+      <legend className="center top-margin"><h3>Filters</h3></legend>
       <ul>
         <SingleFilter />
       </ul>
@@ -92,8 +92,8 @@ class DashBoard extends Component {
 
   render() {
     return (
-      <div className="col-md-3 dashboard">
-        <h1 className="center">DashBoard</h1>
+      <div className="col-md-3 dashboard border-right">
+        <h1 className="center">Fitter<br />DashBoard</h1>
         <AddFilterForm />
         <Filters />
       </div>

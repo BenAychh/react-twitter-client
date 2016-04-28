@@ -34,8 +34,7 @@ class TwitterSocket {
     }, (frame) => {
       console.log('Connected: ' + frame);
       this.stompClient.subscribe('/tweets/12345', (res) => {
-        this.tweetQueue.add(JSON.parse(res.body));
-        this.callback(res.body);
+        this.callback(JSON.parse(res.body));
       });
     });
   }

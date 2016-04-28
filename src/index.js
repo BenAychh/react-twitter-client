@@ -8,6 +8,7 @@ import TweetColumn from './components/TweetColumn';
 import GraphContainer from './components/GraphContainer';
 import TwitterSocket from './tweetprocessor.js';
 import LimitedSizeArray from './helpers/LimitedSizeArray.js';
+import LimitedSizeChartData from './helpers/LimitedSizeChartData.js';
 
 class Home extends Component {
   constructor () {
@@ -30,13 +31,15 @@ var Filtered = React.createClass({
   getInitialState() {
     return {
       columnArray: new LimitedSizeArray(10),
+      graphArray: new LimitedSizeChartData(20),
     };
   },
 
   componentDidMount() {
     this.twitterSocket = new TwitterSocket((tweet) => {
       this.setState({
-        columnArray: this.state.columnArray.add(JSON.parse(tweet)),
+        columnArray: this.state.columnArray.add(tweet),
+        graphArray: this.state.graphArray.add(tweet.grade),
       });
     });
     this.twitterSocket.connect();
@@ -47,7 +50,7 @@ var Filtered = React.createClass({
       <div>
         <Dashboard />
         <TweetColumn tweets={this.state.columnArray.getArray()}/>
-        <GraphContainer />
+        <GraphContainer data={this.state.graphArray.getChartObject()}/>
       </div>
     )
   }

@@ -9,6 +9,7 @@ import GraphContainer from './components/GraphContainer';
 import TwitterSocket from './tweetprocessor.js';
 import LimitedSizeArray from './helpers/LimitedSizeArray.js';
 import LimitedSizeChartData from './helpers/LimitedSizeChartData.js';
+import Filters from './helpers/Filters.js';
 
 class Home extends Component {
   constructor () {
@@ -25,6 +26,8 @@ class Home extends Component {
     )
   }
 }
+
+var filters = new Filters();
 
 var Filtered = React.createClass({
 
@@ -48,7 +51,7 @@ var Filtered = React.createClass({
   render() {
     return (
       <div>
-        <Dashboard />
+        <Dashboard twitterSocket={this.twitterSocket} filters={filters}/>
         <TweetColumn tweets={this.state.columnArray.getArray()}/>
         <GraphContainer data={this.state.graphArray.getChartObject()}/>
       </div>

@@ -16,21 +16,14 @@ class LimitedSizeChartData {
   getChartObject() {
     return {
       labels: this.labelMaker(),
-      responsive: true,
-      showXLabels: this.showLabelNumber(),
       datasets: [
         {
           label: 'Sentiment Analysis',
           fill: false,
           lineTension: 0.3,
-          backgroundColor: 'rgba(75,192,192,0.4)',
-          borderColor: 'rgba(75,192,192,1)',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
+          fillColor: 'rgba(75,192,192,0.4)',
+          strokeColor: 'rgba(75,192,192,1)',
           data: this.sentimentArray,
-          yAxisID: 'y-axis-0',
         },
       ],
     };
@@ -40,13 +33,13 @@ class LimitedSizeChartData {
     var length = this.sentimentArray.length;
     switch (true) {
       case length < 10:
-        return this.generatePattern(0, length + 1, 1);
+        return this.generatePattern(1, length + 1, 1);
       case length < 20:
-        return this.generatePattern(0, 20, 1);
+        return this.generatePattern(1, 20, 1);
       case length < 40:
-        return this.generatePattern(0, 40, 1);
+        return this.generatePattern(1, 40, 1);
       default:
-        return this.generatePattern(0, 60, 1);
+        return this.generatePattern(1, 60, 1);
     }
   }
 

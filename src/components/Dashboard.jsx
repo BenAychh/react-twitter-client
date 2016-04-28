@@ -11,9 +11,46 @@ class AddFilterButton extends Component {
       <div className="center">
       <button>Add Filter</button>
       </div>
-    )
+    );
   }
 }
+
+var AddFilterForm = React.createClass({
+  getInitialState: function () {
+    return {
+      keywords: '',
+    };
+  },
+
+  handleKeywordChange: function (e) {
+    this.setState({ keywords: e.target.value });
+  },
+
+  handleSubmit: function (e) {
+    e.preventDefault();
+    var keywords = this.state.keywords.trim();
+    if (!keywords) {
+      return;
+    }
+
+    this.props.filters.add({
+      keywords: keywords,
+    });
+    this.setState({ keywords: '' });
+  },
+
+  render() {
+    return (
+      <form class="form-inline" onSubmit={this.handleSubmit}>
+        <label className="form-control" htmlFor="keywords">Keywords (Comma Separated)</label>
+        <input type="text" className="form-control" value={this.state.keywords}
+          placeholder="Clinton, Trump"
+          onChange={this.handleKeywordChange}/>
+        <input type="submit" className="form-control" value="Add Filter" />
+      </form>
+    );
+  },
+});
 
 class Filters extends Component {
   constructor() {
@@ -28,7 +65,7 @@ class Filters extends Component {
         <SingleFilter />
       </ul>
       </div>
-    )
+    );
   }
 }
 
@@ -44,7 +81,7 @@ class SingleFilter extends Component {
         <li>Filter Two</li>
         <li>Filter Three</li>
       </div>
-    )
+    );
   }
 }
 
@@ -57,10 +94,10 @@ class DashBoard extends Component {
     return (
       <div className="col-md-3 dashboard">
         <h1 className="center">DashBoard</h1>
-        <AddFilterButton />
+        <AddFilterForm />
         <Filters />
       </div>
-    )
+    );
   }
 }
 

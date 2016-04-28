@@ -2,7 +2,6 @@ import React from 'react';
 import { Component } from 'react';
 import moment from 'moment';
 import Graph from 'react-chartjs';
-var LineGraph = Graph.Line;
 
 class GraphContainer extends Component {
   constructor() {
@@ -39,8 +38,8 @@ class BarGraph extends Component {
 
   render() {
     return (
-      <div className="col-md-6 bar-graph">
-        <Graph.Line data={this.props.data} className="col-md-12"/>
+      <div className="col-md-12 bar-graph">
+        <Graph.Line data={this.props.data} width="600" height="300"/>
       </div>
     );
   }

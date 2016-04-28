@@ -11,7 +11,7 @@ class GraphContainer extends Component {
 
   render() {
     return (
-      <div className="col-md-6 graph-container">
+      <div className="col-md-7 graph-container">
         <BarGraph data={this.props.data}/>
       </div>
     );

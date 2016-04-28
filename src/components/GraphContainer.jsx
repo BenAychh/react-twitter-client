@@ -4,13 +4,14 @@ import moment from 'moment';
 import Graph from 'react-chartjs';
 
 class GraphContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(this.props);
   }
 
   render() {
     return (
-      <div className="col-md-7 graph-container">
+      <div className="col-md-6 graph-container">
         <BarGraph data={this.props.data}/>
       </div>
     );
@@ -38,7 +39,7 @@ class BarGraph extends Component {
 
   render() {
     return (
-      <div className="col-md-12 bar-graph">
+      <div className="col-md-6 bar-graph">
         <Graph.Line data={this.props.data} width="600" height="300"/>
       </div>
     );
@@ -55,7 +56,7 @@ class CandleGraph extends Component {
       <div className="col-md-6 candle-graph">
         <h1 className="center">CandleGraph</h1>
       </div>
-    )
+    );
   }
 }
 

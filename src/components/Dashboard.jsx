@@ -41,7 +41,7 @@ var AddFilterForm = React.createClass({
 
   render() {
     return (
-      <form class="form-inline" onSubmit={this.handleSubmit}>
+      <form className="form-inline" onSubmit={this.handleSubmit}>
         <label className="form-control" htmlFor="keywords">Keywords (Comma Separated)</label>
         <input type="text" className="form-control" value={this.state.keywords}
           placeholder="Clinton, Trump"
@@ -88,7 +88,6 @@ class SingleFilter extends Component {
 class DashBoard extends Component {
   constructor(props) {
     super(props);
-    console.log('props', this.props);
   }
 
   render() {

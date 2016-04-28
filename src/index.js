@@ -35,23 +35,23 @@ var Filtered = React.createClass({
     return {
       columnArray: new LimitedSizeArray(10),
       graphArray: new LimitedSizeChartData(20),
+      twitterSocket: new TwitterSocket((tweet) => {
+        this.setState({
+          columnArray: this.state.columnArray.add(tweet),
+          graphArray: this.state.graphArray.add(tweet.grade),
+        });
+      }),
     };
   },
 
   componentDidMount() {
-    this.twitterSocket = new TwitterSocket((tweet) => {
-      this.setState({
-        columnArray: this.state.columnArray.add(tweet),
-        graphArray: this.state.graphArray.add(tweet.grade),
-      });
-    });
-    this.twitterSocket.connect();
+    this.state.twitterSocket.connect();
   },
 
   render() {
     return (
       <div>
-        <Dashboard twitterSocket={this.twitterSocket} filters={filters}/>
+        <Dashboard twitterSocket={this.state.twitterSocket} filters={filters}/>
         <TweetColumn tweets={this.state.columnArray.getArray()}/>
         <GraphContainer data={this.state.graphArray.getChartObject()}/>
       </div>

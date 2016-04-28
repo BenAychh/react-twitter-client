@@ -19,7 +19,7 @@ class TwitterSocket {
     this.tweetQueue = new TweetQueue(10);
     this.stompClient = null;
     this.callback = pCallback;
-    this.keywords = ['Trump', 'trump'];
+    this.keywords = ['Trump'];
   }
 
   getTweetArray() {
@@ -37,10 +37,10 @@ class TwitterSocket {
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({
       apiKey: '12345',
-      keywords: this.keywords,
+      keywords: ['Trump'],
     }, (frame) => {
       console.log('Connected: ' + frame);
-      this.stompClient.subscribe('/tweets/123456', (res) => {
+      this.stompClient.subscribe('/tweets/12345', (res) => {
         this.callback(JSON.parse(res.body));
       });
     });

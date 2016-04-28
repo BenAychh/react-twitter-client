@@ -86,15 +86,16 @@ class SingleFilter extends Component {
 }
 
 class DashBoard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log('props', this.props);
   }
 
   render() {
     return (
       <div className="col-md-3 dashboard border-right">
         <h1 className="center">Fitter<br />DashBoard</h1>
-        <AddFilterForm />
+        <AddFilterForm filters={this.props.filters} />
         <Filters />
       </div>
     );

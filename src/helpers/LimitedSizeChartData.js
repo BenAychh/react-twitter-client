@@ -18,7 +18,7 @@ class LimitedSizeChartData {
       labels: this.labelMaker(),
       datasets: [
         {
-          label: 'Sentiment Analysis',
+          label: 'Grade Analysis',
           fill: false,
           lineTension: 0.3,
           fillColor: 'rgba(75,192,192,0.4)',

@@ -5,11 +5,15 @@ class TweetQueue {
     this.tweetArray = [];
   }
 
-  add(tweet) {
-    this.tweetArray.unshift(tweet);
+  add(tweetId) {
+    this.tweetArray.unshift(tweetId);
     if (this.tweetArray.length > this.maxSize) {
       this.tweetArray.pop();
     }
+  }
+
+  contains(tweetId) {
+    return this.tweetArray.indexOf(tweetId) !== -1;
   }
 }
 
@@ -19,29 +23,35 @@ class TwitterSocket {
     this.tweetQueue = new TweetQueue(10);
     this.stompClient = null;
     this.callback = pCallback;
-    this.keywords = ['Trump'];
+    this.keywords = [];
   }
 
   getTweetArray() {
     return this.tweetQueue.tweetArray;
   }
 
-  setKeywords(string) {
-    this.keywords = string.split(',').trim();
+  setFilters(object) {
+    this.keywords = object.keywords.trim().split(',');
+    console.log(this.keywords);
     this.disconnect();
     this.connect();
   }
 
   connect() {
-    var socket = new SockJS('http://10.2.12.134:8080/tweet');
+    var socket = new SockJS('http://localhost:8080/tweet');
     this.stompClient = Stomp.over(socket);
+    this.stompClient.debug = null;
     this.stompClient.connect({
       apiKey: '12345',
-      keywords: ['Trump'],
+      keywords: this.keywords,
     }, (frame) => {
       console.log('Connected: ' + frame);
       this.stompClient.subscribe('/tweets/12345', (res) => {
-        this.callback(JSON.parse(res.body));
+        var tweet = JSON.parse(res.body);
+        if (!this.tweetQueue.contains(tweet.id)) {
+          this.callback(JSON.parse(res.body));
+          this.tweetQueue.add(tweet.id);
+        }
       });
     });
   }
@@ -50,8 +60,6 @@ class TwitterSocket {
     if (this.stompClient != null) {
       this.stompClient.disconnect();
     }
-
-    setConnected(false);
     console.log('Disconnected');
   }
 }

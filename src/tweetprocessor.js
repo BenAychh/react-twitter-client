@@ -38,7 +38,7 @@ class TwitterSocket {
   }
 
   connect() {
-    var socket = new SockJS('http://localhost:8080/tweet');
+    var socket = new SockJS('http://54.187.176.147:8080/tweet');
     this.stompClient = Stomp.over(socket);
     this.stompClient.debug = null;
     this.stompClient.connect({

@@ -33,6 +33,14 @@ class AddFilterForm extends Component {
     });
   }
 
+  handleKincaidChange (e) {
+    var temp = this.state.filter;
+    temp.kincaid = e.target.value;
+    this.setState({
+      filter: temp,
+    });
+  }
+
   render() {
     return (
       <form className="form-inline" onSubmit={this.props.onSubmit}>
@@ -40,6 +48,8 @@ class AddFilterForm extends Component {
         <input type="text" className="form-control" value={this.state.filter.keywords}
           placeholder="Clinton, Trump"
           onChange={this.handleKeywordChange}/>
+        <input type="number" className="form-control" value={this.state.filter.kincaid}
+          value=0 onChange={this.handleKincaidChange}/>
         <input type="submit" className="form-control" value="Add Filter" />
       </form>
     );

@@ -21,9 +21,28 @@ class TwitterSocket {
 
   constructor(pCallback) {
     this.tweetQueue = new TweetQueue(10);
-    this.stompClient = null;
     this.callback = pCallback;
-    this.keywords = [];
+    var location = {
+      hostname: '10.2.12.248',
+      port: 4567,
+    };
+    this.webSocket = new WebSocket('ws://' + location.hostname
+      + ':' + location.port + '/subscribe');
+    this.webSocket.onmessage = (msg) => {
+      this.callback(JSON.parse(msg.data));
+    };
+
+    this.webSocket.onmessage.bind(this);
+    this.webSocket.onopen = () => {
+      var object = {
+        apiKey: '5476310c-01d3-43db-8a90-7b9c69274474',
+        kincaid: 0,
+        keywords: '',
+      };
+      this.setFilters(object);
+    }
+
+    this.webSocket.onopen.bind(this);
   }
 
   getTweetArray() {
@@ -31,35 +50,17 @@ class TwitterSocket {
   }
 
   setFilters(object) {
-    this.keywords = object.keywords.trim().split(',');
-    console.log(this.keywords);
-    this.disconnect();
-    this.connect();
-  }
-
-  connect() {
-    var socket = new SockJS('http://10.2.12.248:4567/subscribe');
-    this.stompClient = Stomp.over(socket);
-    this.stompClient.debug = null;
-    this.stompClient.connect({
-      apiKey: '12345',
-      keywords: this.keywords,
-    }, (frame) => {
-      console.log('Connected: ' + frame);
-      this.stompClient.subscribe('/tweets/12345', (res) => {
-        var tweet = JSON.parse(res.body);
-        if (!this.tweetQueue.contains(tweet.id)) {
-          this.callback(JSON.parse(res.body));
-          this.tweetQueue.add(tweet.id);
-        }
-      });
-    });
+    console.log(this.webSocket);
+    object.apiKey = '5476310c-01d3-43db-8a90-7b9c69274474';
+    console.log(object);
+    this.webSocket.send(JSON.stringify(object));
   }
 
   disconnect() {
-    if (this.stompClient != null) {
-      this.stompClient.disconnect();
+    if (this.webSocket != null) {
+      this.webSocket = null;
     }
+
     console.log('Disconnected');
   }
 }

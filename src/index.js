@@ -36,18 +36,18 @@ var Filtered = React.createClass({
       graphArray: new LimitedSizeChartData(20),
       radarArray: new LimitedSizeRadarChart(1000),
       twitterSocket: new TwitterSocket((tweet) => {
-        this.setState({
-          columnArray: this.state.columnArray.add(tweet),
-          graphArray: this.state.graphArray.add(tweet.grade),
-          radarArray: this.state.radarArray.add(tweet.grade),
-        });
+        if (tweet.tweet) {
+          this.setState({
+            columnArray: this.state.columnArray.add(tweet.tweet),
+            graphArray: this.state.graphArray.add(tweet.tweet.grade),
+            radarArray: this.state.radarArray.add(tweet.tweet.grade),
+          });
+        } else if (tweet.message) {
+          console.log(tweet.message);
+        }
       }),
       filters: new Filters(),
     };
-  },
-
-  componentDidMount() {
-    this.state.twitterSocket.connect();
   },
 
   render() {

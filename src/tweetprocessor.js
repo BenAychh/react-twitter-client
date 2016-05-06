@@ -50,9 +50,7 @@ class TwitterSocket {
   }
 
   setFilters(object) {
-    console.log(this.webSocket);
     object.apiKey = '5476310c-01d3-43db-8a90-7b9c69274474';
-    console.log(object);
     this.webSocket.send(JSON.stringify(object));
   }
 
